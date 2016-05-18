@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Dagger 2," />
 
 
 
@@ -84,15 +84,19 @@
 
 
 
-<meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Smine Yeung">
-<meta property="og:url" content="smineyeung.github.io/index.html">
+<meta name="description" content="在程序中， 最重要的类是那些真正实现功能的类：BarcodeDecoder, KoopaPhysicsEngine 和 AudioStreamer. 这些类都会依赖于其他的类; 可能是 BarcodeCameraFinder, DefaultPhysicsEngine, 和 HttpStreamer.
+相对来说，程序中最不重要的类是辅助类: BarcodeDecoderFactory, Camer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dagger 2 - User's Guide 翻译">
+<meta property="og:url" content="smineyeung.github.io/2016/05/18/Dagger_2_User_s_Guide/index.html">
 <meta property="og:site_name" content="Smine Yeung">
-<meta property="og:description">
+<meta property="og:description" content="在程序中， 最重要的类是那些真正实现功能的类：BarcodeDecoder, KoopaPhysicsEngine 和 AudioStreamer. 这些类都会依赖于其他的类; 可能是 BarcodeCameraFinder, DefaultPhysicsEngine, 和 HttpStreamer.
+相对来说，程序中最不重要的类是辅助类: BarcodeDecoderFactory, Camer">
+<meta property="og:updated_time" content="2016-05-18T09:35:52.665Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Smine Yeung">
-<meta name="twitter:description">
+<meta name="twitter:title" content="Dagger 2 - User's Guide 翻译">
+<meta name="twitter:description" content="在程序中， 最重要的类是那些真正实现功能的类：BarcodeDecoder, KoopaPhysicsEngine 和 AudioStreamer. 这些类都会依赖于其他的类; 可能是 BarcodeCameraFinder, DefaultPhysicsEngine, 和 HttpStreamer.
+相对来说，程序中最不重要的类是辅助类: BarcodeDecoderFactory, Camer">
 
 
 
@@ -110,7 +114,7 @@
   };
 </script>
 
-  <title> Smine Yeung </title>
+  <title> Dagger 2 - User's Guide 翻译 | Smine Yeung </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -131,9 +135,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -243,9 +245,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -265,10 +267,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2016/05/18/Dagger_2_User_s_Guide/" itemprop="url">
-                  Dagger 2 - User's Guide 翻译
-                </a>
+                Dagger 2 - User's Guide 翻译
               
             
           </h1>
@@ -334,9 +333,7 @@
       
 
       
-        
-          
-            <p>在程序中， 最重要的类是那些真正实现功能的类：<code>BarcodeDecoder</code>, <code>KoopaPhysicsEngine</code> 和 <code>AudioStreamer</code>. 这些类都会依赖于其他的类; 可能是 <code>BarcodeCameraFinder</code>, <code>DefaultPhysicsEngine</code>, 和 <code>HttpStreamer</code>.</p>
+        <p>在程序中， 最重要的类是那些真正实现功能的类：<code>BarcodeDecoder</code>, <code>KoopaPhysicsEngine</code> 和 <code>AudioStreamer</code>. 这些类都会依赖于其他的类; 可能是 <code>BarcodeCameraFinder</code>, <code>DefaultPhysicsEngine</code>, 和 <code>HttpStreamer</code>.</p>
 <p>相对来说，程序中最不重要的类是辅助类: <code>BarcodeDecoderFactory</code>, <code>CameraServiceLoader</code>, <code>MutableContextWrapper</code>. 这些辅助类就像笨拙的胶带一样，将那些重要的功能类连接起来.（实际上就是讲需要用到依赖注入的地方需要编写大量重复的工厂类代码）</p>
 <p>Dagger 就是在实现 <a href="http://en.wikipedia.org/wiki/Dependency_injection" target="_blank" rel="external">dependency injection</a> 的设计模式的时候用来替代累赘的工厂类代码，让你专注于编写那些重要的功能类上. 声明依赖，指定如何满足依赖，然后运行你的应用即可.</p>
 <p>Dagger 构建在标准的  <a href="http://docs.oracle.com/javaee/7/api/javax/inject/package-summary.html" target="_blank" rel="external">javax.inject</a>  注解 (<a href="https://jcp.org/en/jsr/detail?id=330" target="_blank" rel="external">JSR 330</a>) 基础上，每个类都会变得<strong>很容易测试</strong>。你不需要为了便于将 <code>RpcCreditCardService</code>  替换掉 <code>FakeCreditCardService</code> 而编写一大堆重复的代码.</p>
@@ -430,36 +427,44 @@
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.google.dagger<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>dagger<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.google.dagger<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>dagger-compiler<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <h2 id="许可证-License"><a href="#许可证-License" class="headerlink" title="许可证 (License)"></a>许可证 (License)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Copyright 2014 Google, Inc.</span><br><span class="line">Copyright 2012 Square, Inc.</span><br><span class="line"></span><br><span class="line">Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span><br><span class="line">you may not use this file except in compliance with the License.</span><br><span class="line">You may obtain a copy of the License at</span><br><span class="line"></span><br><span class="line">   http://www.apache.org/licenses/LICENSE-2.0</span><br><span class="line"></span><br><span class="line">Unless required by applicable law or agreed to in writing, software</span><br><span class="line">distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span><br><span class="line">WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span><br><span class="line">See the License for the specific language governing permissions and</span><br><span class="line">limitations under the License.</span><br></pre></td></tr></table></figure>
 
-          
+      
+    </div>
+
+    <div>
+      
         
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
     <footer class="post-footer">
       
-
+        <div class="post-tags">
+          
+            <a href="/tags/Dagger-2/" rel="tag">#Dagger 2</a>
+          
+        </div>
       
 
       
+
       
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -467,6 +472,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/05/18/Dagger_2_User_s_Guide/"
+           data-title="Dagger 2 - User's Guide 翻译" data-url="smineyeung.github.io/2016/05/18/Dagger_2_User_s_Guide/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -486,8 +499,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -548,6 +570,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么-Dagger-2-是不一样的-Why-Dagger-2-is-Different"><span class="nav-number">1.</span> <span class="nav-text">为什么 Dagger 2 是不一样的 (Why Dagger 2 is Different)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dagger-的用法-Using-Dagger"><span class="nav-number">2.</span> <span class="nav-text">Dagger 的用法 (Using Dagger)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#声明依赖关系-Declaring-Dependencies"><span class="nav-number">2.1.</span> <span class="nav-text">声明依赖关系 (Declaring Dependencies)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现依赖关系-Satisfying-Dependencies"><span class="nav-number">2.2.</span> <span class="nav-text">实现依赖关系 (Satisfying Dependencies)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构建对象图-Building-the-Graph"><span class="nav-number">2.3.</span> <span class="nav-text">构建对象图 (Building the Graph)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#绑定对象图-Bindings-in-the-graph"><span class="nav-number">2.3.1.</span> <span class="nav-text">绑定对象图 (Bindings in the graph)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单例和作用域注解绑定-Singletons-and-Scoped-Bindings"><span class="nav-number">2.4.</span> <span class="nav-text">单例和作用域注解绑定 (Singletons and Scoped Bindings)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可重用的作用域注解-Reusable-scope"><span class="nav-number">2.5.</span> <span class="nav-text">可重用的作用域注解 (Reusable scope)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#延迟注入-Lazy-injections"><span class="nav-number">2.6.</span> <span class="nav-text">延迟注入 (Lazy injections)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提供者注入-Provider-injections"><span class="nav-number">2.7.</span> <span class="nav-text">提供者注入 (Provider injections)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#限定符-Qualifiers"><span class="nav-number">2.8.</span> <span class="nav-text">限定符 (Qualifiers)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译时有效性的检查-Compile-time-Validation"><span class="nav-number">2.9.</span> <span class="nav-text">编译时有效性的检查 (Compile-time Validation)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译时生成代码-Compile-time-Code-Generation"><span class="nav-number">2.10.</span> <span class="nav-text">编译时生成代码 (Compile-time Code Generation)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-Dagger-构建你的项目-Using-Dagger-In-Your-Build"><span class="nav-number">3.</span> <span class="nav-text">使用 Dagger 构建你的项目 (Using Dagger In Your Build)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Gradle-用户-Gradle-Users"><span class="nav-number">3.1.</span> <span class="nav-text">Gradle 用户 (Gradle Users)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#许可证-License"><span class="nav-number">4.</span> <span class="nav-text">许可证 (License)</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -644,6 +677,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
